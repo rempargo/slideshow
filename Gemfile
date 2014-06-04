@@ -42,3 +42,6 @@ end
 gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails'
 gem 'uglifier', '>= 1.3.0'
+
+# Jquery Mobile
+gem 'jquery_mobile_rails'

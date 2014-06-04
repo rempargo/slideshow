@@ -1,6 +1,6 @@
 Slideshow::Application.routes.draw do
 
-  get '/slideshow' => 'static_pages#slideshow'
+  root :to => 'static_pages#slideshow'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

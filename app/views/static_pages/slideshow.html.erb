@@ -1,1 +1,101 @@
-<h1>sdlkjfslkdjflsdkjf</h1>
+<div class="container">
+
+  <div class="imageDiv">
+
+    <img id="theImage" src="assets/a0.png"></img>
+
+  </div>
+
+</div>
+
+<script type="text/javascript">
+
+  $(function() {
+
+    current_letter_pos = 0;
+    current_number = 0;
+
+    carousel_length = {};
+
+    // Instructions for configuration:
+    // carousel_length[letter] - define length of each column
+    // letters - define the letters
+
+    carousel_length['a'] = 4;
+    carousel_length['b'] = 6;
+    carousel_length['c'] = 5;
+
+    letters = ['a','b','c'];
+
+
+    // rest of the code:
+
+    var renderImage = function() {
+      $('.imageDiv').prepend('<img id="theImage" src="assets/' + letters[current_letter_pos] + current_number + '.png"></img>');
+      setTimeout(function() {
+        $('.imageDiv').center();
+      }, 20)
+    }
+
+    // renderImage();
+
+    jQuery.fn.center = function () {
+      this.css("position","fixed");
+      this.css("top", ($(window).height() / 2) - (this.height() / 2));
+      this.css("left", ($(window).width() / 2) - (this.width() / 2));
+      return this;
+    }
+
+    // bizarre centering bug in Chrome requires setTimeout
+    setTimeout(function() {
+      $('.imageDiv').center();
+    }, 20)
+
+    // $('.imageDiv').center();
+
+    // swipe up/down headache alleviated by TouchSwipe-Jquery-Plugin
+
+    $("body").swipe( {
+      swipeUp:function(event, direction, distance, duration) {
+        current_number++;
+        if (current_number === carousel_length[letters[current_letter_pos]]) {
+          current_number = 0;
+        }
+        $('#theImage').remove();
+        renderImage();
+
+      },
+      swipeDown:function(event, direction, distance, duration) {
+        current_number--;
+        if (current_number === -1) {
+          current_number = carousel_length[letters[current_letter_pos]] - 1;
+        }
+        $('#theImage').remove();
+        renderImage();
+      },
+      swipeLeft:function(event, direction, distance, duration) {
+        current_letter_pos++;
+        if(current_letter_pos === letters.length) {
+          current_letter_pos = 0;
+        }
+        current_number = 0;
+        $('#theImage').remove();
+        renderImage();
+      },
+      swipeRight:function(event, direction, distance, duration) {
+        current_letter_pos--;
+        if(current_letter_pos === -1) {
+          current_letter_pos = letters.length - 1;
+        }
+        $('#theImage').remove();
+        renderImage();
+      },
+      click:function(event, target) { 
+      },
+      threshold:100,
+      allowPageScroll:"vertical"
+    });
+
+  })
+
+</script>
