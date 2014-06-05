@@ -6,4 +6,4 @@
 
 ## Instructions
 
-Edit slides.json file in `app/views/static_pages/slides.json`
+Edit slides.json file in `app/views/static_pages/slides.json`, put images in `app/assets/images`. That's it.
